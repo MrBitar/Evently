@@ -1,8 +1,10 @@
+
 <?php 
 session_start();
-unset($_SESSION["user_id"]);
-unset($_SESSION["allUser"]);
 
+ unset($_SESSION["memberId"]);
+unset($_SESSION["memberPhoto"]);
+ unset($_SESSION["memberName"]);
 
-header("Location: login.php");
+header("Location: index.php");
 ?>

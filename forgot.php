@@ -7,7 +7,7 @@
 <?php
 session_start();
 ?>
-  <title>Login</title>
+  <title>Password</title>
   <!-- Favicons -->
   <link href="../uploads/logo.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -59,25 +59,30 @@ session_start();
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <h5 class="card-title text-center pb-0 fs-4">Change Your Password</h5>
                     <p class="text-center small">Enter your email & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" onaction="login.php" method="post" novalidate>
+                  <form class="row g-3 needs-validation" action="forgotPass.php" method="post" novalidate>
 
                     <div class="col-12">
-                      <label for="email" class="form-label">Email</label>
+                      <label for="forgotEmail" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" class="form-control" id="email" required>
-                        <div class="invalid-feedback" id="invalid-email" name="invalid-email">Please enter your email.</div>
+                        <input type="email" name="forgotEmail" class="form-control" id="forgotEmail" required>
+                        <div class="invalid-feedback" id="invalid-forgotEmail" name="invalid-forgotEmail-">Please enter your email.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" required>
-                      <div class="invalid-feedback" id="invalid-password" name="invalid-password" >Please enter your password.</div>
+                      <label for="forgotPassword" class="form-label">Password</label>
+                      <input type="password" name="forgotPassword" class="form-control" id="forgotPassword" required>
+                      <div class="invalid-feedback" id="invalid-forgotPassword" name="invalid-forgotPassword" >Please enter your password.</div>
+                    </div>
+                    <div class="col-12">
+                      <label for="forgotPasswordC" class="form-label">Confirm Password</label>
+                      <input type="password" name="forgotPasswordC" onkeyup="checkPass(this)" class="form-control" id="forgotPasswordC" required>
+                      <div class="invalid-feedback" id="invalid-forgotPasswordC"  name="invalid-forgotPasswordC" >Please confirm your password.</div>
                     </div>
 
                     <div class="col-12">
@@ -87,17 +92,13 @@ session_start();
                       </div>
                     </div>
                     <div class="col-12">
-                      <div class="form-check">
-                        <label class="form-check-label" for="rememberMe"><a href="register.php">already have an account ?</a></label>
-                      </div>
-                    </div><div class="col-12">
-                      <div class="form-check">
-                        <label class="form-check-label" for="rememberMe"><a href="forgot.php">Forgot Password</a></label>
-                      </div>
+                      <input class="btn btn-primary w-100" disabled name="submit" id="submit" type="submit" value="Change"/>
                     </div>
                     <div class="col-12">
-                      <input class="btn btn-primary w-100" name="submit" id="submit" type="submit" value="Login"/>
-                    </div>
+                      <input class="btn btn-primary w-100"   type="button" onclick="window.location.href ='login.php'" value="Back"/>
+                    
+                      </div>
+                      
                   </form>
 
                 </div>
@@ -137,5 +138,22 @@ session_start();
 
 </body>
 <?php include "memberLogin.php"?> 
+<script>
 
+  function checkPass(e){
+   var d= e.value;
+    var pass = document.getElementById('forgotPassword').value;
+    var passC=e;
+    var passM=document.getElementById('invalid-forgotPasswordC');
+    if(d == pass){
+      passC.classList.remove("is-invalid");
+      passC.classList.add("is-valid");
+      passM.textContent = "";
+      document.getElementById('submit').disabled = false;
+    }else{
+      passC.classList.add("is-invalid");
+      passM.textContent = "Passwords should match";
+    }
+  }
+</script>
 </html>
